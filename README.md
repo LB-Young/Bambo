@@ -3,7 +3,9 @@ Bambo is a new proxy framework. Compared with mainstream frameworks, it is more 
 
 
 # USE
-1. pip install {packages}
+1. pip install {packages}. 
+- pip install -r requirements.txt  
+- (This project uses deepseek as an example. openai needs to be installed.)
 2. Define all tools you want to use in the tools directory or other path. The custom function needs to be asynchronous, the parameter passed must include **params_format**, and the default value is False. The **params_format** parameter must be checked at the beginning of the function body. If True, all other parameters that must be passed are returned as a list to verify that the extracted parameters meet the function call requirements when tool_call is used.
 3. You need to define the llm you want to call in the llm_cient.py file, including the **model** and **client** parameters.
 4. You can then create your own test scripts in the examples folder. In the script, you need to define the /*roles*/ and /*tools*/ that your scenario needs. Bambo's instantiated object is then initialized and query is passed into the object's execute interface, and Bambo starts the execution logic.
