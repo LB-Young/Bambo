@@ -10,6 +10,9 @@ Bambo is a new proxy framework. Compared with mainstream frameworks, it is more 
 3. You need to define the llm you want to call in the llm_cient.py file, including the **model** and **client** parameters.
 4. You can then create your own test scripts in the examples folder. In the script, you need to define the /*roles*/ and /*tools*/ that your scenario needs. Bambo's instantiated object is then initialized and query is passed into the object's execute interface, and Bambo starts the execution logic.
 
+- Note:
+/*When initializing the Bambo example, in the tools parameters, each tool must be configured with describe and object. describe is the description of the current tool, and what parameters need to be extracted when calling the current tool. object is the function object of the current tool.*/
+
 ### Example
 ```python
 import asyncio
@@ -72,3 +75,5 @@ python examples/code_expert.py
 ![code_expert](https://github.com/user-attachments/assets/e6f54290-3418-47dc-bf93-71515df1ce28)
 
 
+# Participate
+Bambo is currently in its initial stage, more functions will be integrated in the future, and we look forward to more partners joining in. If you would like to work with the author to improve this project, please contact lby15356@gmail.com

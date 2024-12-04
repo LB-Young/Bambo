@@ -16,7 +16,12 @@ async def main():
         "medical_expert": "医疗专家",
         "computer_expert": "计算机专家",
     }
-    tools = {}
+    tools = {
+        "code_execute": {
+            "describe": "代码执行器,参数{'code'：'待执行的代码'},如果代码有多个请合并成一个。",
+            "obj": code_execute,
+        }
+    }
     bambo = Bambo(
         client=client,
         bambo_role=None,
@@ -25,9 +30,10 @@ async def main():
         agents=None,
         model=model,
     )
-    query = "我是高考生，现在想要选专业，但是不知道选什么专业。请你介绍一下金融、法律和计算机三个专业分别有什么优点和缺点。"
+    query = "请帮我生成一段选择排序的代码，调用代码执行器运行生成的代码，基于结果分析一下选择排序的特点"
     async for item in bambo.execute(qeury=query):
         print(item, end="", flush=True)
+
 
 
 if __name__ == "__main__":

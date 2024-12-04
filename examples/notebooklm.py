@@ -28,8 +28,6 @@ async def main():
     with open(r"C:\Users\86187\Desktop\test.txt", "r", encoding="utf-8") as f:
         reference = f.read()
     query = f"请根据以下参考信息回答问题：\n{reference}\n\n问题：以采访对话形式介绍一下这篇文章的内容，至少5论对话。"
-    # query = "炒股的时候什么时候买进比较好？"
-    # query = "请介绍一下主流的数组排序算法的优缺点。"
     async for item in bambo.execute(qeury=query):
         print(item, end="", flush=True)
 
