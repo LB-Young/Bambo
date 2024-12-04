@@ -1,6 +1,7 @@
 # Bambo
 Bambo is a new proxy framework. Compared with mainstream frameworks, it is more lightweight and flexible and can handle various load tasks.
 
+![Bambo_structure](https://github.com/user-attachments/assets/360e9b32-43fc-4b61-956b-5eac579add12)
 
 # USE
 1. pip install {packages}. 
