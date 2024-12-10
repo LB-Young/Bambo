@@ -67,8 +67,10 @@ python examples/paper_recommend.py
 4、我的研究方向是['LLM','RAG','Agent','多模态'],请根据我的研究方向，推荐一些相关的论文，推荐结果按照{论文标题：类别、论文链接、摘要的总结}的形式输出；
 """
 - answer
+```
 https://x.com/i/status/1866480838394745075
 https://www.bilibili.com/video/BV1ajqCYrEVa/?vd_source=63fa380f22166ecfe2ab8b828b77344d
+```
 
 ##  MultiRoles
 - describe: Multi-role scenarios are implemented based on Bambo for building agent-based team-based scenarios. This project constructs a college entrance examination consulting group, including experts from different majors, who can provide professional responses to students' questions from different majors.
