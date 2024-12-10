@@ -56,7 +56,7 @@ class Bambo:
         for param in need_params:
             extract_params[param] = function_params_json[param]
         result = await self.tools[function_name](**extract_params)
-        return result
+        return str(result)
 
     async def execute(self, qeury):
         prompt = self.role.replace("{prompt}", qeury).strip()
