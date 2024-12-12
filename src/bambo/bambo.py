@@ -13,7 +13,7 @@ class Bambo:
         self.tools = {}
         self.tool_describe = []
         for key, value in tools.items():
-            self.tools[key] = value["obj"]
+            self.tools[key] = value["object"]
             self.tool_describe.append(f"{key}: {value['describe']}\n")
         self.role = bambo_role.replace(r"{roles}", self.roles_info).replace(r"{tools}", "".join(self.tool_describe))
         self.agents = agents
@@ -46,20 +46,35 @@ class Bambo:
             if stack == 0:
                 json_end = index + 1
                 break
-        return json.loads(params_content[:json_end+1])
+        try:
+            return json.loads(params_content[:json_end].replace("'", '"'))
+        except:
+            re_extracted_params = await self.re_params_extract(params_content=params_content[:json_end])
+            return re_extracted_params
     
+    async def re_params_extract(self, params_content):
+        breakpoint()
+        params_content = params_content.strip()
+        params = {}
+        for param in params_content.split(","):
+            param = param.strip()
+            key, value = param.split(":", 1)
+            params[key.strip()] = value.strip()
+        return params
+
     async def tool_run(self, tool_message):
         function_name, function_params = tool_message.split(":", 1)
         function_params_json = await self.params_extract(function_params)
         need_params = await self.tools[function_name](params_format=True)
         extract_params = {}
         for param in need_params:
-            extract_params[param] = function_params_json[param]
+            extract_params[param] = function_params_json.get(param, "")
+            
         result = await self.tools[function_name](**extract_params)
         return str(result)
 
-    async def execute(self, qeury):
-        prompt = self.role.replace("{prompt}", qeury).strip()
+    async def execute(self, query):
+        prompt = self.role.replace("{prompt}", query).strip()
         messages = [{"role": "user", "content": prompt}]
         result = self.llm_client.chat.completions.create(
                 model=self.model,  # 请填写您要调用的模型名称
@@ -88,8 +103,8 @@ class Bambo:
             result = await self.tool_run(tool_message=tool_messages)
             for item in str(result+"\n"):
                 yield item
-            query = qeury + "\n" + "已经执行内容:" + all_answer + "\n" + "工具执行结果:" + result
-            async for item in self.execute(qeury=query):
+            query = query + "\n" + "已经执行内容:" + all_answer + "\n" + "工具执行结果:" + result
+            async for item in self.execute(query=query):
                 yield item
         # result = result.choices[0].message.content
         # print("agent_result:", result)

@@ -19,7 +19,7 @@ async def main():
     tools = {
         "code_execute": {
             "describe": "代码执行器,参数{'code'：'待执行的代码'},如果代码有多个请合并成一个。",
-            "obj": code_execute,
+            "object": code_execute,
         }
     }
     bambo = Bambo(
@@ -31,7 +31,7 @@ async def main():
         model=model,
     )
     query = "请帮我生成一段选择排序的代码，调用代码执行器运行生成的代码，基于结果分析一下选择排序的特点"
-    async for item in bambo.execute(qeury=query):
+    async for item in bambo.execute(query=query):
         print(item, end="", flush=True)
 
 

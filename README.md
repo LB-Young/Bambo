@@ -12,7 +12,9 @@ Bambo is a new proxy framework. Compared with mainstream frameworks, it is more 
 4. You can then create your own test scripts in the examples folder. In the script, you need to define the /*roles*/ and /*tools*/ that your scenario needs. Bambo's instantiated object is then initialized and query is passed into the object's execute interface, and Bambo starts the execution logic.
 
 - Note:
-/*When initializing the Bambo example, in the tools parameters, each tool must be configured with describe and object. describe is the description of the current tool, and what parameters need to be extracted when calling the current tool. object is the function object of the current tool.*/
+1. /*When initializing the Bambo example, in the tools parameters, each tool must be configured with describe and object. describe is the description of the current tool, and what parameters need to be extracted when calling the current tool. object is the function object of the current tool.*/
+
+2. Some tools are not included, you can implement them freely. If you need some of my tools, you can send a message to my email(lby15356@gmail.com).
 
 ### Example
 ```python
@@ -36,7 +38,7 @@ bambo = Bambo(
     model=model,
 )
 query = "我是高考生，现在想要选专业，但是不知道选什么专业。请你介绍一下金融、法律和计算机三个专业分别有什么优点和缺点。"
-async for item in bambo.execute(qeury=query):
+async for item in bambo.execute(query=query):
     print(item, end="", flush=True)
 ```
 

@@ -26,7 +26,7 @@ async def main():
         model=model,
     )
     query = "我是高考生，现在想要选专业，但是不知道选什么专业。请你介绍一下金融、法律和计算机三个专业分别有什么优点和缺点。"
-    async for item in bambo.execute(qeury=query):
+    async for item in bambo.execute(query=query):
         print(item, end="", flush=True)
 
 
