@@ -47,7 +47,7 @@ async for item in bambo.execute(query=query):
 
 
 # CASES
-## 1. NotebookLM
+##  NotebookLM
 - describe: Based on Bambo, notebooklm has achieved a similar effect, which can summarize the main content of the file in the form of an interview conversation with the incoming text. However, there is no TTS related logic in this project, so it can only be converted to text in the form of dialogue. If readers want to implement TTS, they can add corresponding code in the test script.
 ```
 python examples/notebooklm.py
@@ -56,8 +56,25 @@ python examples/notebooklm.py
 - answer:
   ![notetbook](https://github.com/user-attachments/assets/3cc6a966-3b57-4527-90d1-91edfdb77729)
 
+## PaperRecommend
+- The paper recommend tool is an agent for recommending papers every day, which retrieves some of the latest papers at the moment, summarizes them by category, and recommends them according to the user's research direction.
+```
+python examples/paper_recommend.py
+```
+- query:
+"""
+1、请首先搜索最新的10篇论文；
+2、然后对这些论文进行分类，类别列表为['LLM','RAG','Agent','多模态','音频','计算机视觉','其它']，分类结果按照{论文标题：类别}的形式输出;
+3、对分类后的论文按照类别进行总结，并且给出当前类别有哪些文件，总结结果按照{类别1：类别1多篇论文的总结。类别1的所有参考论文标题。}的形式输出；
+4、我的研究方向是['LLM','RAG','Agent','多模态'],请根据我的研究方向，推荐一些相关的论文，推荐结果按照{论文标题：类别、论文链接、摘要的总结}的形式输出；
+"""
+- answer
+```
+https://x.com/i/status/1866480838394745075
+https://www.bilibili.com/video/BV1ajqCYrEVa/?vd_source=63fa380f22166ecfe2ab8b828b77344d
+```
 
-## 2. MultiRoles
+##  MultiRoles
 - describe: Multi-role scenarios are implemented based on Bambo for building agent-based team-based scenarios. This project constructs a college entrance examination consulting group, including experts from different majors, who can provide professional responses to students' questions from different majors.
 ```
 python examples/multi_roles.py
