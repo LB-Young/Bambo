@@ -31,7 +31,8 @@ async def main():
         model=model,
     )
     query = "请帮我生成一段选择排序的代码，调用代码执行器运行生成的代码，基于结果分析一下选择排序的特点"
-    async for item in bambo.execute(query=query):
+    messages = [{"role": "user", "content": query}]
+    async for item in bambo.execute(messages=messages):
         print(item, end="", flush=True)
 
 

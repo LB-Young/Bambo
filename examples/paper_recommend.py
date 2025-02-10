@@ -54,7 +54,8 @@ async def main():
 （要求：推荐阅读的论文需要给出论文的类别、star数目、标题、摘要总结（一句话）和论文链；按照分类的结果对类别内的全部论文进行总结，并且需要在总结内容的结束位置列出总结内容参考文章的标题。）
 最后以“daily_paper_recommend”为主题发送到lby15356@gmail.com邮箱
 """
-    async for item in bambo.execute(query=query):
+    messages = [{"role": "user", "content": query}]
+    async for item in bambo.execute(messages=messages):
         print(item, end="", flush=True)
 
 
