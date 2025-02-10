@@ -73,9 +73,9 @@ class Bambo:
         result = await self.tools[function_name](**extract_params)
         return str(result)
 
-    async def execute(self, query):
-        prompt = self.role.replace("{prompt}", query).strip()
-        messages = [{"role": "user", "content": prompt}]
+    async def execute(self, messages):
+        system_message = {"role": "system", "content": self.role.strip()}
+        messages = [system_message] + messages
         result = self.llm_client.chat.completions.create(
                 model=self.model,  # 请填写您要调用的模型名称
                 messages=messages,
@@ -103,8 +103,8 @@ class Bambo:
             result = await self.tool_run(tool_message=tool_messages)
             for item in str(result+"\n"):
                 yield item
-            query = query + "\n" + "已经执行内容:" + all_answer + "\n" + "工具执行结果:" + result
-            async for item in self.execute(query=query):
+            new_message = {"role": "user", "content": "已经执行内容:" + all_answer + "\n" + "工具执行结果:" + result}
+            async for item in self.execute(messages=messages + [new_message]):
                 yield item
         # result = result.choices[0].message.content
         # print("agent_result:", result)

@@ -1,4 +1,4 @@
-from zhipuai import ZhipuAI
+# from zhipuai import ZhipuAI
 from openai import OpenAI
 from groq import Groq
 from together import Together
@@ -6,7 +6,7 @@ from together import Together
 import json
 
 def load_api_key(platform):
-    with open(r"C:\Users\86187\Desktop\api_key.json", "r", encoding="utf-8") as f:
+    with open(r"/Users/liubaoyang/Documents/windows/api_key.json", "r", encoding="utf-8") as f:
         api_dict = json.load(f)
     return api_dict.get(platform, None)
 
@@ -16,12 +16,19 @@ def load_api_key(platform):
 
 
 # Deepseek
-client = OpenAI(
-    api_key=load_api_key("deepseek"),
-    base_url="https://api.deepseek.com",
-)
-model = "deepseek-chat"
+# client = OpenAI(
+#     api_key=load_api_key("deepseek"),
+#     base_url="https://api.deepseek.com",
+# )
+# model = "deepseek-chat"
 
+# Deepseek （阿里云）
+client = OpenAI(
+    api_key=load_api_key("aliyun"),
+    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+)
+model = "deepseek-v3"
+# model = "deepseek-r1"
 
 # Groq
 # client = Groq(
